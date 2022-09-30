@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <script src = 'https://code.jquery.com/jquery-3.6.1.js'></script>
+      <script src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js'></script>
+      <script type="text/javascript", charset="utf-8"></script>
+      <style>
+            .team_1_p {
+                  padding: 7px; /* Поля внутри блока */
+                  margin: 10px 0 5px 5px; /* Отступы вокруг */
+            }
+            .team_1_p figcaption {
+                  margin: 10px 0 0px 35px; /* Отступы вокруг абзаца */
+            }
+            .team_2_p {
+                  position: relative;
+                  padding: 7px; /* Поля внутри блока */
+                  margin: 10px 0 5px 400px; /* Отступы вокруг */
+                  top: -324px;
+            }
+            .team_2_p figcaption {
+                  margin: 10px 0 0px 35px; /* Отступы вокруг абзаца */
+            }
+            div.output_teams {
+                  position: relative;
+                  font-size: 400%;
+                  width: 120px;
+                  margin: -525px 0 0 200px;
+                  /* border-bottom-width: 0.2cm; */
+                  border: 2px solid #000;
+                  box-sizing: border-box;
+            }
+            .countdown_view {
+                  position: fixed; /* Фиксированное положение */
+                  left: 240px; 
+                  top: 10%; /* Расстояние сверху */
+                  padding: 10px; /* Поля вокруг текста */ 
+                  background: rgb(2, 181, 184); /* Цвет фона */ 
+                  border: 4px solid rgb(0, 0, 0); /* Параметры рамки */
+                  }
+
+      </style>
+</head>
+<body onload="update_values();">
+      <div name="team_name_list">
+            <select id="select_send_ajax" name="team_name">
+                  {% for team_name in list_team %}
+                      <option name="asd" SELECTED>{{team_name}}</option>
+                  {% endfor %}
+            </select>
+      </div>
+
+      <figure class="team_1_p">
+            <p>
+                  <button id="team_1_in">
+                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
+                  </button>
+            </p>
+            <figcaption id="qwe">/</figcaption>
+            <p>
+                  <button id="team_1_out">
+                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
+                  </button>
+            </p>      
+      </figure>
+      
+      <figure class="team_2_p">
+            <p>
+                  <button id="team_2_in">
+                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
+                  </button>
+            </p>
+            <figcaption id="qwe1">/</figcaption>
+            <p>
+                  <button id="team_2_out">
+                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
+                  </button>
+            </p>      
+      </figure>
+
+      <div class="output_teams">
+            <output id="team_1_total">?</output> :
+            <output id="team_2_total">?</output>
+      </div>
+            <button class="countdown_start" type="button">start</button>
+            <button class="coundown_stop" type="button">stop</button>
+
+            <form>
+                  <label for="pin">Set countdown</label>
+                  <input type="text" placeholder="mm"/>
+                  <input type="text" placeholder="ss"/>
+            </form>
+            <div class="countdown_view">00:00</div>
+      <script>
+            var interval = setInterval(update_values, 1000);
+
+            function update_values() {
+                  $.getJSON('/get_team_score',
+                  function(data) {
+                        $('#team_1_total').text(data.team_1);
+                        console.log(data);
+                  });
+                  $.getJSON('/get_team_score',
+                  function(data) {
+                        $('#team_2_total').text(data.team_2);
+                        console.log(data);
+                  });
+
+                  team_name = $('#select_send_ajax option:selected').text();
+                  $.ajax({
+                        type: 'POST',
+                        url: 'http://127.0.0.1:5050/',
+                        data: JSON.stringify(team_name),
+                        contentType: 'application/json'
+                  });
+
+                  team_1 = team_name.split(':')[0].replace("{", '');
+                  team_2 = team_name.split(':')[1].replace("}", '');
+                  $('#qwe').text(team_1);
+                  $('#qwe1').text(team_2);
+            };
+
+            // var count_team_1 = 0;
+            // var count_team_2 = 0;
+            // var peredati = count_team_1;
+            // localStorage.setItem('team_1_total', peredati);
+
+            team_1_in.onclick = function() {
+                  $.getJSON('/add_score_team_1');
+            };    
+
+            team_2_in.onclick = function() {
+                  $.getJSON('/add_score_team_2');
+            };
+            
+            team_1_out.onclick = function() {
+                  $.getJSON('/put_score_team_1');
+            };    
+
+            team_2_out.onclick = function() {
+                  $.getJSON('/put_score_team_2');
+            };
+            
+
+            //       $.ajax({
+            //       method: 'POST',
+            //       url: 'http://127.0.0.1:5050/control_score',
+            //       data: data_out,
+            //       success: console.log("done" + data_out)
+            //       // success: function(data) {
+            //       //                   data= $(data).find('#team_1_total');
+            //       //                   // data = $("#content").html(html);
+            //       //                   console.log(data)
+            //       //       $('#team_1').html(data);
+                        
+            //       // }
+                  
+            //       }); 
+                  
+            // };
+      </script>
+      
+
+
+</body>
+</html>
