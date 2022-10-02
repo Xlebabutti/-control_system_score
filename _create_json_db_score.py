@@ -1,4 +1,3 @@
-from tkinter.messagebox import NO
 from _workplace_score import db
 
 class Score(db.Model):

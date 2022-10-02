@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="stylesheet" href="/static/css/_control_page.css">
+      <script src = 'https://code.jquery.com/jquery-3.6.1.js'></script>
+      <script src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js'></script>
+      <script type="text/javascript", charset="utf-8"></script>
+</head>
+<body onload="update_values();">
+      <div class="container">
+
+            <div class="team_name_list">
+                  <select class="team_name" id="team_name">
+                        {% for team_name in list_team %}
+                            <option class="asd" SELECTED>{{team_name}}</option>
+                        {% endfor %}
+                  </select>
+            </div>
+
+            <div class="button_control_score">
+                  <button class="button_1_in" id="button_1_in">
+                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
+                  </button>
+                  <button class="button_1_out" id="button_1_out">
+                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
+                  </button>
+                  <button class="button_2_in" id="button_2_in">
+                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
+                  </button>
+                  <button class="button_2_out" id="button_2_out">
+                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
+                  </button>
+            </div>
+
+            <div class="countdown">
+
+                  <div class="countdown_view">
+                        <label for="pin">Set countdown</label>
+                        <input type="text" placeholder="mm"/>
+                        <input type="text" placeholder="ss"/>
+                        <button class="set_countdown" type="button">set</button>
+                  </div>
+                  <div class="button_countdown_control">
+                        <button class="countdown_start" type="button" onclick="countdown('time', 10, 0);">start</button>
+                        <button class="coundown_stop" type="button">stop</button>
+                        <button class="countdown_10_mm" type="button">10_mm</button>
+                        <button class="countdown_12_mm" type="button">12_mm</button>        
+                  </div> 
+            </div>          
+      
+            <div class="output">
+                  <div class="output_teams_name">
+                        <output class="team_1_total" id="team_1_total">?</output> :
+                        <output class="team_2_total" id="team_2_total">?</output>
+                  </div>
+                  <div class="output_countdown" id="time">
+                        <output>00:00</output>
+                  </div>
+                  <div class="output_teams_score" id="output_teams_score">
+                        <output class="team_1_score" id="team_1_score">10</output>
+                        <output class="team_2_score" id="team_2_score">20</output>
+                  </div>
+            </div>
+      </script>
+      <div class="timer">
+          <span class="hour">00</span>:<span class="minute">00</span>:<span class="second">10</span>
+      </div>
+      <div class="control">
+          <button onClick="timer.start(1000)">Start</button> 
+          <button onClick="timer.stop()">Stop</button> 
+          <button onClick="timer.reset(60)">Reset</button> 
+          <button onClick="timer.mode(1)">Count up</button> 
+          <button onClick="timer.mode(0)">Count down</button>
+      </div>    
+      </div>
+      
+      <script>
+            var interval = setInterval(update_values, 1000);
+
+            function update_values() {
+                  $.getJSON('/get_team_score',
+                  function(data) {
+                        $('#team_1_score').text(data.team_1);
+                        console.log(data);
+                  });
+                  $.getJSON('/get_team_score',
+                  function(data) {
+                        $('#team_2_score').text(data.team_2);
+                        console.log(data);
+                  });
+
+                  team_name = $('#team_name option:selected').text();
+                  $.ajax({
+                        type: 'POST',
+                        url: 'http://127.0.0.1:5050/control_page',
+                        data: JSON.stringify(team_name),
+                        contentType: 'application/json'
+                  });
+
+                  team_1 = team_name.split(':')[0].replace("{", '');
+                  team_2 = team_name.split(':')[1].replace("}", '');
+                  // console.log(team_1)
+                  // console.log(team_2)
+                  $('#team_1_total').text(team_1);
+                  $('#team_2_total').text(team_2);
+            };
+
+            button_1_in.onclick = function() {
+                  $.getJSON('/add_score_team_1');
+            };    
+
+            button_2_in.onclick = function() {
+                  $.getJSON('/add_score_team_2');
+            };
+            
+            button_1_out.onclick = function() {
+                  $.getJSON('/put_score_team_1');
+            };    
+
+            button_2_out.onclick = function() {
+                  $.getJSON('/put_score_team_2');
+            };
+ 
+      </script>
+      <script>
+      function _timer(callback)
+{
+    var time = 0;     //  The default time of the timer
+    var mode = 1;     //    Mode: count up or count down
+    var status = 0;    //    Status: timer is running or stoped
+    var timer_id;    //    This is used by setInterval function
+    
+    // this will start the timer ex. start the timer with 1 second interval timer.start(1000) 
+    this.start = function(interval)
+    {
+        interval = (typeof(interval) !== 'undefined') ? interval : 1000;
+ 
+        if(status == 0)
+        {
+            status = 1;
+            timer_id = setInterval(function()
+            {
+                switch(mode)
+                {
+                    default:
+                    if(time)
+                    {
+                        time--;
+                        generateTime();
+                        if(typeof(callback) === 'function') callback(time);
+                    }
+                    break;
+                    
+                    case 1:
+                    if(time < 86400)
+                    {
+                        time++;
+                        generateTime();
+                        if(typeof(callback) === 'function') callback(time);
+                    }
+                    break;
+                }
+            }, interval);
+        }
+    }
+    
+    //  Same as the name, this will stop or pause the timer ex. timer.stop()
+    this.stop =  function()
+    {
+        if(status == 1)
+        {
+            status = 0;
+            clearInterval(timer_id);
+        }
+    }
+    
+    // Reset the timer to zero or reset it to your own custom time ex. reset to zero second timer.reset(0)
+    this.reset =  function(sec)
+    {
+        sec = (typeof(sec) !== 'undefined') ? sec : 0;
+        time = sec;
+        generateTime(time);
+    }
+    
+    // Change the mode of the timer, count-up (1) or countdown (0)
+    this.mode = function(tmode)
+    {
+        mode = tmode;
+    }
+    
+    // This methode return the current value of the timer
+    this.getTime = function()
+    {
+        return time;
+    }
+    
+    // This methode return the current mode of the timer count-up (1) or countdown (0)
+    this.getMode = function()
+    {
+        return mode;
+    }
+    
+    // This methode return the status of the timer running (1) or stoped (1)
+    this.getStatus
+    {
+        return status;
+    }
+    
+    // This methode will render the time variable to hour:minute:second format
+    function generateTime()
+    {
+        var second = time % 60;
+        var minute = Math.floor(time / 60) % 60;
+        var hour = Math.floor(time / 3600) % 60;
+        
+        second = (second < 10) ? '0'+second : second;
+        minute = (minute < 10) ? '0'+minute : minute;
+        hour = (hour < 10) ? '0'+hour : hour;
+        
+        $('div.timer span.second').html(second);
+        $('div.timer span.minute').html(minute);
+        $('div.timer span.hour').html(hour);
+    }
+}
+ 
+// example use
+var timer;
+ 
+$(document).ready(function(e) 
+{
+    timer = new _timer
+    (
+        function(time)
+        {
+            if(time == 0)
+            {
+                timer.stop();
+            }
+        }
+    );
+    timer.reset(0);
+    timer.mode(0);
+});
+      </script>
+</body>
+</html>

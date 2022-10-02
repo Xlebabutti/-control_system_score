@@ -1,16 +1,14 @@
-import imp
-from flask import Flask, render_template, jsonify, request, flash
+from flask import Flask, render_template, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///score_db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/control_page", methods=["GET", "POST"])
 def workplace_score():
     if request.method == "POST":
         data = request.get_json().split(':')
@@ -22,19 +20,18 @@ def workplace_score():
         from _create_json_db_score import Score
         s = Score()
         s.update_team_1_now(data_team_1, data_team_2)
-        
-        # db.session.commit()
 
     from _create_json_db_score import Team_name
     t = Team_name()
-    return render_template("_workplace_score.html", list_team = t.get_team_1_name())
+    return render_template("_control_page.html", list_team = t.get_team_1_name())
 
 
-@app.route("/control_score", methods=["GET", 'POST'])
+@app.route("/output_view", methods=["GET", 'POST'])
 def control_score():
-    return render_template("_control_score.html")
-
-
+    return render_template("_output_view.html")
+#--------------------------------------------------------#
+#  It's a area be responsible for get and post requests  #
+#--------------------------------------------------------#
 @app.route('/get_team_score', methods=['GET'])
 def remout():   
     from _create_json_db_score import Score
@@ -99,18 +96,6 @@ def get_team_2_now2():
     print(team_2)
     return jsonify(team_2)
 
-
-
-# @sio.on('vmix_socet', namespace='/test')
-# def input_pgm_vmix(pgm_vmix):   
-#     global Team_1
-#     global Tema_2
-#     return sio.emit(pgm_vmix, namespace='/test')
-
-    # sio.emit('Team_1', Team_1, namespace = '/test')
-    # sio.emit('Team_2', Tema_2, namespace = '/test')
-    # sio.emit(pgm_vmix)
-    # print('client connected!')
 
 if __name__ == '__main__':
    app.run(host = '127.0.0.1', port=5050, debug = True)
