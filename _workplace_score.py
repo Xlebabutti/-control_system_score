@@ -11,7 +11,9 @@ db = SQLAlchemy(app)
 @app.route("/control_page", methods=["GET", "POST"])
 def workplace_score():
     if request.method == "POST":
-        data = request.get_json().split(':')
+        das = request.get_json()
+        print(das[1])
+        data = das[0].split(':')
         # print(data)
         data_team_1 = eval(data[0].replace('{', '')).strip()
         # print(data_team_1)

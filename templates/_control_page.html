@@ -43,8 +43,8 @@
                   <div class="button_countdown_control">
                         <button class="countdown_start" type="button" onclick="countdown('time', 10, 0);">start</button>
                         <button class="coundown_stop" type="button">stop</button>
-                        <button class="countdown_10_mm" type="button">10_mm</button>
-                        <button class="countdown_12_mm" type="button">12_mm</button>        
+                        <button class="countdown_10_mm" type="button" onclick="timer.reset(600)">10_mm</button>
+                        <button class="countdown_12_mm" type="button" onclick="timer.reset(720)">12_mm</button>        
                   </div> 
             </div>          
       
@@ -54,7 +54,7 @@
                         <output class="team_2_total" id="team_2_total">?</output>
                   </div>
                   <div class="output_countdown" id="time">
-                        <output>00:00</output>
+                        <output class="min">00</output>:<output class="sec">00</output>
                   </div>
                   <div class="output_teams_score" id="output_teams_score">
                         <output class="team_1_score" id="team_1_score">10</output>
@@ -81,26 +81,28 @@
                   $.getJSON('/get_team_score',
                   function(data) {
                         $('#team_1_score').text(data.team_1);
-                        console.log(data);
                   });
                   $.getJSON('/get_team_score',
                   function(data) {
                         $('#team_2_score').text(data.team_2);
-                        console.log(data);
+                        console.log(data)
                   });
 
                   team_name = $('#team_name option:selected').text();
-                  minute = $('#minute option:selected').text();
+                  minute = $('span.minute').text();
                   second = $('span.second').text();
+                  var real_info = [team_name, minute, second]
 
                   console.log(minute);
                   console.log(second);
+
                   $.ajax({
                         type: 'POST',
                         url: 'http://127.0.0.1:5050/control_page',
-                        data: JSON.stringify(team_name),
+                        data: JSON.stringify(real_info),
                         contentType: 'application/json'
                   });
+
 
                   team_1 = team_name.split(':')[0].replace("{", '');
                   team_2 = team_name.split(':')[1].replace("}", '');
@@ -225,6 +227,10 @@
         $('div.timer span.second').html(second);
         $('div.timer span.minute').html(minute);
         $('div.timer span.hour').html(hour);
+
+      $('div.output_countdown output.sec').html(second);
+      $('div.output_countdown output.min').html(minute);
+        
     }
 }
  
