@@ -63,7 +63,7 @@
             </div>
       </script>
       <div class="timer">
-          <span class="hour">00</span>:<span class="minute">00</span>:<span class="second">10</span>
+          <span class="hour">00</span>:<span class="minute">00</span>:<span class="second">00</span>
       </div>
       <div class="control">
           <button onClick="timer.start(1000)">Start</button> 
@@ -90,6 +90,11 @@
                   });
 
                   team_name = $('#team_name option:selected').text();
+                  minute = $('#minute option:selected').text();
+                  second = $('span.second').text();
+
+                  console.log(minute);
+                  console.log(second);
                   $.ajax({
                         type: 'POST',
                         url: 'http://127.0.0.1:5050/control_page',
