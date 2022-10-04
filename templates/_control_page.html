@@ -8,6 +8,7 @@
 </head>
 <body onload="update_values();">
       <div class="container">
+            <div class="central_container">
 
             <div class="team_name_list">
                   <select class="team_name" id="team_name">
@@ -18,18 +19,11 @@
             </div>
 
             <div class="button_control_score">
-                  <button class="button_1_in" id="button_1_in">
-                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
-                  </button>
-                  <button class="button_1_out" id="button_1_out">
-                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
-                  </button>
-                  <button class="button_2_in" id="button_2_in">
-                        <img src="/static/images/plus_icon-icons.com_70890.png" width="100" height="100">
-                  </button>
+                  <button class="button_1_in" id="button_1_in"></button>
+                  <button class="button_1_out" id="button_1_out"></button>
+                  <button class="button_2_in" id="button_2_in"></button>
                   <button class="button_2_out" id="button_2_out">
-                        <img src="/static/images/minus-gross-horizontal-straight-line-symbol_icon-icons.com_74137.png" width="100" height="100">
-                  </button>
+</button>
             </div>
 
             <div class="countdown">
@@ -46,19 +40,21 @@
                         <button class="countdown_10_mm" type="button" onclick="timer.reset(600)">10_mm</button>
                         <button class="countdown_12_mm" type="button" onclick="timer.reset(720)">12_mm</button>        
                   </div> 
+                  
             </div>          
-      
+            <div class="button_resset"><button>resset</button></div>
             <div class="output">
                   <div class="output_teams_name">
-                        <output class="team_1_total" id="team_1_total">?</output> :
+                        <output class="team_1_total" id="team_1_total">?</output>
                         <output class="team_2_total" id="team_2_total">?</output>
                   </div>
+                  <div class="time_logo">TIME</div>
                   <div class="output_countdown" id="time">
-                        <output class="min">00</output>:<output class="sec">00</output>
+                       <output class="min">00</output>:<output class="sec">00</output>
                   </div>
                   <div class="output_teams_score" id="output_teams_score">
-                        <output class="team_1_score" id="team_1_score">10</output>
-                        <output class="team_2_score" id="team_2_score">20</output>
+                        <output class="team_1_score" id="team_1_score">10</output>:<output class="team_2_score" id="team_2_score">20</output>
+                  </div>
                   </div>
             </div>
       </script>

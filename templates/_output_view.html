@@ -28,6 +28,9 @@
       <output id="team_2_now">?</output>
       <output id="team_1">?</output>
       <output id="team_2">?</output>
+      <output id="time_mm">time_mm</output>:<output id="time_ss">time_ss</output>
+      
+
       <img src="/static/images/Frame 1.png" alt="Snow" style="width:100%;">
       
 
@@ -55,6 +58,16 @@
                   $.getJSON('/get_team_2_now',
                   function(data) {
                         $('#team_2_now').text(data);
+                  });
+
+                  $.getJSON('/get_time_mm',
+                  function(data) {
+                        $('#time_mm').text(data);
+                  });
+
+                  $.getJSON('/get_time_ss',
+                  function(data) {
+                        $('#time_ss').text(data);
                   });
 
             }

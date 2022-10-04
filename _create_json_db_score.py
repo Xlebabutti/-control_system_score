@@ -6,6 +6,8 @@ class Score(db.Model):
     score_team_2 = db.Column(db.Integer, primary_key = True)
     team_1_now = db.Column(db.String(100), primary_key = True)
     team_2_now = db.Column(db.String(100), primary_key = True)
+    time_mm = db.Column(db.String(100), primary_key = True)
+    time_ss = db.Column(db.String(100), primary_key = True)
     id = db.Column(db.Integer, primary_key = True)
 
     
@@ -27,6 +29,14 @@ class Score(db.Model):
     def get_team_now(self):
             team_now = self.get_querry_all_score()
             return team_now[0].team_now
+
+    def get_time_mm(self):
+        time_mm = self.get_querry_all_score()
+        return time_mm[0].time_mm
+
+    def get_time_ss(self):
+        time_ss = self.get_querry_all_score()
+        return time_ss[0].time_ss
 
 
 # Edit score teams in score_bd------------------------------>
@@ -70,7 +80,13 @@ class Score(db.Model):
     def update_team_1_now(self, team_1, team_2):
         s = Score.query.filter_by(id=1).first()
         s.team_1_now = team_1
-        s.team_2_now = team_2
+        s.team_2_now = team_2   
+        db.session.commit()
+
+    def update_time(self, time_mm, time_ss):
+        s = Score.query.filter_by(id=1).first()
+        s.time_mm = time_mm
+        s.time_ss = time_ss
         db.session.commit()
 
     def get_team_1_now(self):
@@ -131,10 +147,8 @@ class Team_name(db.Model):
 
 # S.team_1_now = '13213123'
 # db.session.commit()
-c = Score()
-c.get_team_1_now()
-
-# print(c.get_score_team_1())
+# c = Score()
+# print(c.get_time_mm())
 
 # c.add_score_team_1()
 # c.reset_score()

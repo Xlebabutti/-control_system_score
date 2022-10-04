@@ -27,3 +27,4 @@ function countdown( elementName, minutes, seconds )
 }
 
 countdown( "ten-countdown", 1, 0 );
+

@@ -14,7 +14,7 @@ def workplace_score():
         das = request.get_json()
         print(das[1])
         data = das[0].split(':')
-        # print(data)
+        print(data)
         data_team_1 = eval(data[0].replace('{', '')).strip()
         # print(data_team_1)
         data_team_2 = eval(data[1].replace('}', '')).strip()
@@ -22,6 +22,7 @@ def workplace_score():
         from _create_json_db_score import Score
         s = Score()
         s.update_team_1_now(data_team_1, data_team_2)
+        s.update_time(das[1], das[2])
 
     from _create_json_db_score import Team_name
     t = Team_name()
@@ -98,6 +99,21 @@ def get_team_2_now2():
     print(team_2)
     return jsonify(team_2)
 
+@app.route('/get_time_mm', methods=['GET', 'POST'])
+def get_time_mm():
+    from _create_json_db_score import Score
+    c = Score()
+    time_mm = c.get_time_mm()
+    print(time_mm)
+    return jsonify(time_mm)
+
+@app.route('/get_time_ss', methods=['GET', 'POST'])
+def get_time_ss():
+    from _create_json_db_score import Score
+    c = Score()
+    time_ss = c.get_time_ss()
+    print(time_ss)
+    return jsonify(time_ss)
 
 if __name__ == '__main__':
    app.run(host = '127.0.0.1', port=5050, debug = True)
