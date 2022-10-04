@@ -1,0 +1,62 @@
+
+  h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      }
+
+*, *::after, *::before {
+      box-sizing: border-box;
+      }
+body {
+      margin: 0;
+}
+.background {
+      height: 100vh;
+      background: url(/static/images/BACKGROUND.png) no-repeat center;
+      background-size: cover;
+}
+.central_box {
+      position:absolute;
+      width: 1500px;
+      height: 700px;
+      left: 210px;
+      top: 190px;
+
+      background: linear-gradient(101.28deg, rgba(0, 0, 0, 0.8) -2.51%, rgba(0, 0, 0, 0.3) 81.26%);
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+      border-radius: 69px;
+}
+
+/* button control */
+.button_1_in {position: absolute;width: 234px;height: 234px;left: 288px;top: 260px;background: rgba(217, 217, 217, 0.2);border-radius: 30px;}
+
+.button_2_in {
+      position: absolute;
+width: 234px;
+height: 234px;
+left: 788px;
+top: 260px;
+
+background: rgba(217, 217, 217, 0.2);
+border-radius: 30px;
+}
+.button_1_out {
+      position: absolute;
+width: 234px;
+height: 234px;
+left: 282px;
+top: 586px;
+
+background: rgba(217, 217, 217, 0.2);
+border-radius: 30px;
+}
+.button_2_out {
+      position: absolute;
+width: 234px;
+height: 234px;
+left: 782px;
+top: 586px;
+
+background: rgba(217, 217, 217, 0.2);
+border-radius: 30px;
+}
