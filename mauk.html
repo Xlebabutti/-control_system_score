@@ -10,14 +10,40 @@
 <body>
     <div class="container">
         <div class="background">
-            <div class="central_box"></div>
-            <div class="button_countdown_control">
-                <button class="button_1_in"></button>
-                <button class="button_1_out"></button>
-                <button class="button_2_in"></button>
-                <button class="button_2_out"></button>
+            <div class="central_box">
+                <div class="button_countdown_control">
+                    <button class="button_1_in">
+                        <img src="/static/images/plus-svgrepo-com 2.svg">
+                    </button>
+                    <button class="button_1_out">
+                        <img src="/static/images/Group 6.svg">
+                    </button>
+                    <button class="button_2_in">
+                        <img src="/static/images/plus-svgrepo-com 2.svg">
+                    </button>
+                    <button class="button_2_out">
+                        <img src="/static/images/Group 6.svg">
+                    </button>
+
+                    <button class="resset">RESSET</button>
+                </div>
+                <div class="time">TIME</div>
+                <div class="time_view">00:00</div>
+                <div class="team_name_1">team_1</div>
+                <div class="team_name_2">team_2</div>
+                <div class="score_team_1">0</div>
+                <div class="double_symbol">:</div>
+                <div class="score_team_2">0</div>
+
+                <div class="switch-btn"></div>
             </div>
+            
         </div>
     </div>
 </body>
+<script>
+    $('.switch-btn').click(function(){
+      $(this).toggleClass('switch-on');
+    });
+    </script>
 </html>

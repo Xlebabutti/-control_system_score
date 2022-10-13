@@ -15,48 +15,258 @@ body {
       background-size: cover;
 }
 .central_box {
-      position:absolute;
-      width: 1500px;
-      height: 700px;
-      left: 210px;
-      top: 190px;
-
+      position: absolute;
+      width: 1167px;
+      height: 544px;
+      left: calc(50% - 1167px/2);
+      top: calc(50% - 544px/2);
+      
       background: linear-gradient(101.28deg, rgba(0, 0, 0, 0.8) -2.51%, rgba(0, 0, 0, 0.3) 81.26%);
       border: 1px solid rgba(0, 0, 0, 0.5);
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
       border-radius: 69px;
+      
 }
 
 /* button control */
-.button_1_in {position: absolute;width: 234px;height: 234px;left: 288px;top: 260px;background: rgba(217, 217, 217, 0.2);border-radius: 30px;}
+.button_1_in {
+      position: absolute;
+      width: 183px;
+      height: 183px;
+      left: 50px;
+      top: 50px;
+
+      background: rgba(217, 217, 217, 0.2);
+      border-radius: 30px;
+}
 
 .button_2_in {
       position: absolute;
-width: 234px;
-height: 234px;
-left: 788px;
-top: 260px;
+      width: 183px;
+      height: 183px;
+      left: 468.5px;
+      top: 50px;
+      
+      background: rgba(217, 217, 217, 0.2);
+      border-radius: 30px;
 
-background: rgba(217, 217, 217, 0.2);
-border-radius: 30px;
+      
 }
 .button_1_out {
       position: absolute;
-width: 234px;
-height: 234px;
-left: 282px;
-top: 586px;
+      width: 183px;
+      height: 183px;
+      left: 50px;
+      top: 311px;
 
-background: rgba(217, 217, 217, 0.2);
-border-radius: 30px;
+      background: rgba(217, 217, 217, 0.2);
+      border-radius: 30px;
+
 }
 .button_2_out {
       position: absolute;
-width: 234px;
-height: 234px;
-left: 782px;
-top: 586px;
-
-background: rgba(217, 217, 217, 0.2);
-border-radius: 30px;
+      width: 183px;
+      height: 183px;
+      left: 468.5px;
+      top: 311px;
+      
+      background: rgba(217, 217, 217, 0.2);
+      border-radius: 30px;
 }
+
+.resset { 
+      position: absolute;
+      width: 118px;
+      height: 53px;
+      left: 291.5px;
+      top: 441px;
+      background-color: rgba(255, 255, 255, 0);
+      border: 4px solid #D9D9D9;
+      border-radius: 30px;
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+      align-items: center;
+      text-align: center;
+
+      color: #FFFFFF;
+}
+
+/* TIME */
+
+.time {
+      position: absolute;
+      width: 149px;
+      height: 92px;
+      left: 275.5px;
+      top: 82px;
+
+      font-family: 'Nikukyu';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 20px;
+      text-align: center;
+
+      color: #FFFFFF;
+}
+.time_view {
+      position: absolute;
+      width: 149px;
+      height: 93px;
+      left: 275.5px;
+      top: 99px;
+
+      font-family: 'Nikukyu';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 35px;
+      line-height: 35px;
+      text-align: center;
+
+      color: #FFFFFF;
+
+}
+/* TEAM NAME */
+
+.team_name_1 {
+      position: absolute;
+      width: 150px;
+      height: 33px;
+      left: 64.5px;
+      top: 258px;
+
+      font-family: 'Futura';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 27px;
+      text-align: center;
+
+      color: #FFFFFF;
+}
+.team_name_2 {
+      position: absolute;
+      width: 150px;
+      height: 34px;
+      left: 484.5px;
+      top: 258px;
+
+      font-family: 'Futura';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 27px;
+      text-align: center;
+
+      color: #FFFFFF;
+}
+
+/* SCORE TEAM */
+.score_team_1 {
+      position: absolute;
+      width: 71px;
+      height: 93px;
+      left: 268.5px;
+      top: 239px;
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 61px;
+      text-align: center;
+
+      color: #FFFFFF;
+
+}
+
+.double_symbol {
+      position: absolute;
+      width: 21px;
+      height: 68px;
+      left: 339.5px;
+      top: 235px;
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 61px;
+      text-align: center;
+
+      color: #FFFFFF;
+
+}
+
+.score_team_2 {
+      position: absolute;
+      width: 71px;
+      height: 93px;
+      left: 360.5px;
+      top: 239px;
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 61px;
+      text-align: center;
+
+      color: #FFFFFF;
+}
+
+/* SWITCH BUTTON */
+
+.switch-btn {
+      position:absolute;
+      top: 440px;
+      left: 710.5px;
+      width: 109px;
+      height: 53px;
+
+      border: 4px solid #D9D9D9;
+      border-radius: 30px;
+      background: #bfbfbf00; /* цвет фона */
+      z-index: 0;
+      margin: 0;
+      padding: 0;
+     
+      cursor: pointer;
+      transition-duration: 300ms; /* анимация */
+    }
+    .switch-btn::after {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      content: "OFF";
+      padding: 9.5px;
+      
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+      color: #0a246b;
+
+      width: 62px;
+      height: 53px;
+      background: #ff0000;
+      border: 4px solid #ff0000;
+      border-radius: 30px;
+     
+      transition-duration: 300ms; /* анимация */
+      
+      z-index: 1;
+    }
+    .switch-on::after {
+      content: "ON";
+      left: 47px;
+      background: #8FFF00;
+      border: 4px solid  #8FFF00;
+      
+    }
