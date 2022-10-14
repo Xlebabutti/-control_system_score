@@ -147,8 +147,8 @@ class Team_name(db.Model):
 
 # S.team_1_now = '13213123'
 # db.session.commit()
-# c = Score()
-# print(c.get_time_mm())
+c = Score()
+print(c.get_time_mm())
 
 # c.add_score_team_1()
 # c.reset_score()

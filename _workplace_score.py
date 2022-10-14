@@ -3,30 +3,30 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///score_db.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sc2ore_db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
 @app.route("/control_page", methods=["GET", "POST"])
 def workplace_score():
-    if request.method == "POST":
-        das = request.get_json()
-        print(das[1])
-        data = das[0].split(':')
-        print(data)
-        data_team_1 = eval(data[0].replace('{', '')).strip()
-        # print(data_team_1)
-        data_team_2 = eval(data[1].replace('}', '')).strip()
+    # if request.method == "POST":
+    #     das = request.get_json()
+    #     print(das[1])
+    #     data = das[0].split(':')
+    #     print(data)
+    #     data_team_1 = eval(data[0].replace('{', '')).strip()
+    #     # print(data_team_1)
+    #     data_team_2 = eval(data[1].replace('}', '')).strip()
 
-        from _create_json_db_score import Score
-        s = Score()
-        s.update_team_1_now(data_team_1, data_team_2)
-        s.update_time(das[1], das[2])
+    #     from _create_json_db_score import Score
+    #     s = Score()
+    #     s.update_team_1_now(data_team_1, data_team_2)
+    #     s.update_time(das[1], das[2])
 
-    from _create_json_db_score import Team_name
-    t = Team_name()
-    return render_template("_control_page.html", list_team = t.get_team_1_name())
+    # from _create_json_db_score import Team_name
+    # t = Team_name()
+    # , list_team = t.get_team_1_name()
+    return render_template("_control_page.html")
 
 
 @app.route("/output_view", methods=["GET", 'POST'])

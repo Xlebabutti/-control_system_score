@@ -7,7 +7,7 @@
     <script src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js'></script>
     <script type="text/javascript", charset="utf-8"></script>
 </head>
-<body>
+<body onload="update_values();">
     <div class="container">
         <div class="background">
             <div class="central_box">
@@ -48,14 +48,70 @@
                 <div class="switch-btn"></div>
                 <input class="mm" placeholder="mm">
                 <input class="ss" placeholder="ss">
+                <div name="team_name_list">
+                    <select id="select_send_ajax" class="team_name">
+                          {% for team_name in list_team %}
+                              <option class="asd" SELECTED>{{team_name}}</option>
+                          {% endfor %}
+                    </select>
             </div>
             
         </div>
     </div>
 </body>
-<script>
+    <script>
     $('.switch-btn').click(function(){
       $(this).toggleClass('switch-on');
     });
     </script>
+    <script>
+        var interval = setInterval(update_values, 1000);
+
+        function update_values() {
+              $.getJSON('/get_team_score',
+              function(data) {
+                    $('#team_1_total').text(data.team_1);
+                    console.log(data);
+              });
+              $.getJSON('/get_team_score',
+              function(data) {
+                    $('#team_2_total').text(data.team_2);
+                    console.log(data);
+              });
+
+              team_name = $('#select_send_ajax option:selected').text();
+              $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:5050/',
+                    data: JSON.stringify(team_name),
+                    contentType: 'application/json'
+              });
+
+              team_1 = team_name.split(':')[0].replace("{", '');
+              team_2 = team_name.split(':')[1].replace("}", '');
+              $('#qwe').text(team_1);
+              $('#qwe1').text(team_2);
+        };
+
+        // var count_team_1 = 0;
+        // var count_team_2 = 0;
+        // var peredati = count_team_1;
+        // localStorage.setItem('team_1_total', peredati);
+
+        team_1_in.onclick = function() {
+              $.getJSON('/add_score_team_1');
+        };    
+
+        team_2_in.onclick = function() {
+              $.getJSON('/add_score_team_2');
+        };
+        
+        team_1_out.onclick = function() {
+              $.getJSON('/put_score_team_1');
+        };    
+
+        team_2_out.onclick = function() {
+              $.getJSON('/put_score_team_2');
+        };
+  </script>
 </html>
