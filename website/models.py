@@ -1,4 +1,5 @@
-from _workplace_score import db
+from .extensions import db
+
 
 class Score(db.Model):
     # id = db.Column(db.Integer, primary_key = True)
@@ -110,9 +111,5 @@ class Team_name(db.Model):
         for count in range(0, len(score_team_1)):
             dict_team_name = {score_team_1[count].team_1_name :  score_team_1[count].team_2_name}
             list_team_name.append(dict_team_name)
-        
         return list_team_name
 
-db.create_all()
-
-        

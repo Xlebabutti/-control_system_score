@@ -1,4 +1,12 @@
-from _workplace_score import db
+from flask import Flask, render_template, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////score_db.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
 
 class Score(db.Model):
     # id = db.Column(db.Integer, primary_key = True)
@@ -110,9 +118,7 @@ class Team_name(db.Model):
         for count in range(0, len(score_team_1)):
             dict_team_name = {score_team_1[count].team_1_name :  score_team_1[count].team_2_name}
             list_team_name.append(dict_team_name)
-        
         return list_team_name
-
-db.create_all()
-
-        
+if __name__ == '__main__':
+    db.create_all()
+    app.run(host = '127.0.0.1', port=5050, debug = True)
