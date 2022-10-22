@@ -1,15 +1,28 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, jsonify, request
 from website.models import Score, Team_name
 
-views = Blueprint('views', __name__)
+
+view_team = Blueprint('view_team', __name__)
+
 c = Score()
 t = Team_name()
-@views.route('/')
-def home():
-    print(c.get_querry_all_score())
-    return render_template('mauk.html')
-@views.route('/123')
-def home1():
- 
-    return "<p>123<p>"
+
+
+@view_team.route('/get_team_name', methods=['GET', 'POST'])
+def get_team_name():   
+    data = request.get_json()
+    print(data)
+    return jsonify(data)
+
+@view_team.route('/get_team_1_now', methods=['GET', 'POST'])
+def get_team_1_now1():
+    team_1 = c.get_team_1_now()
+    print(team_1)
+    return jsonify(team_1)
+
+@view_team.route('/get_team_2_now', methods=['GET', 'POST'])
+def get_team_2_now2():
+    team_2 = c.get_team_2_now()
+    print(team_2)
+    return jsonify(team_2)
 

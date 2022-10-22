@@ -15,7 +15,7 @@ class Score(db.Model):
 # Get item table in score_bd------------------------------->
 
     def get_querry_all_score(self):
-        print(Score.query.all())
+        return Score.query.all()
 
     def get_score_team_1(self):
         score_team_1 = self.get_querry_all_score()
@@ -90,6 +90,7 @@ class Score(db.Model):
 
     def get_team_1_now(self):
         data_team = self.get_querry_all_score()
+        print(data_team[0].team_1_now)
         return data_team[0].team_1_now
 
     def get_team_2_now(self):
@@ -112,6 +113,3 @@ class Team_name(db.Model):
             dict_team_name = {score_team_1[count].team_1_name :  score_team_1[count].team_2_name}
             list_team_name.append(dict_team_name)
         return list_team_name
-
-c = Score
-print(c.get_querry_all_score)

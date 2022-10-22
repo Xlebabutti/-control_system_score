@@ -82,7 +82,7 @@
               team_name = $('#select_send_ajax option:selected').text();
               $.ajax({
                     type: 'POST',
-                    url: 'http://127.0.0.1:5050/',
+                    url: 'http://127.0.0.1:5000/',
                     data: JSON.stringify(team_name),
                     contentType: 'application/json'
               });

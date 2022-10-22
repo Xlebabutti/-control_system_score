@@ -1,15 +1,39 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, jsonify
 from website.models import Score, Team_name
 
-views = Blueprint('views', __name__)
+
+view_score = Blueprint('view_score', __name__)
+
 c = Score()
 t = Team_name()
-@views.route('/')
-def home():
-    print(c.get_querry_all_score())
-    return render_template('mauk.html')
-@views.route('/123')
-def home1():
- 
-    return "<p>123<p>"
+
+
+@view_score.route('/get_team_score', methods=['GET'])
+def remout():   
+    return jsonify(team_1 = c.get_score_team_1(), team_2 = c.get_score_team_2())
+
+
+@view_score.route('/add_score_team_1', methods=['GET'])
+def add_score_team_1():   
+    return jsonify(c.add_score_team_1())
+
+
+@view_score.route('/add_score_team_2', methods=['GET'])
+def add_score_team_2():   
+    return jsonify(c.add_score_team_2())
+
+
+@view_score.route('/put_score_team_1', methods=['GET'])
+def put_score_team_1():   
+    return jsonify(c.put_score_team_1())
+
+
+@view_score.route('/put_score_team_2', methods=['GET'])
+def put_score_team_2():   
+    return jsonify(c.put_score_team_2())
+
+
+@view_score.route('/reset_score', methods=['GET'])
+def reset_score():   
+    return jsonify(c.reset_score())
 

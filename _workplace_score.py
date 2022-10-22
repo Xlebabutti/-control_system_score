@@ -35,9 +35,9 @@ db = SQLAlchemy(app)
 # @app.route("/output_view", methods=["GET", 'POST'])
 # def control_score():
 #     return render_template("_output_view.html")
-# #--------------------------------------------------------#
-# #  It's a area be responsible for get and post requests  #
-# #--------------------------------------------------------#
+#--------------------------------------------------------#
+#  It's a area be responsible for get and post requests  #
+#--------------------------------------------------------#
 # @app.route('/get_team_score', methods=['GET'])
 # def remout():   
 #     from _create_json_db_score import Score
@@ -118,5 +118,5 @@ db = SQLAlchemy(app)
 #     print(time_ss)
 #     return jsonify(time_ss)
 
-# if __name__ == '__main__':
-#    app.run(host = '127.0.0.1', port=5050, debug = True)
+if __name__ == '__main__':
+   app.run(host = '127.0.0.1', port=5050, debug = True)
