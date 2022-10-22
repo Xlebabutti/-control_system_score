@@ -14,17 +14,16 @@ t = Team_name()
 
 @views.route("/", methods=['GET', 'POST'])
 def workplace_score():
-    # if request.method == "POST":
-    #     das = request.get_json()
-    #     print(das[1])
-    #     data = das[0].split(':')
-    #     print(data)
-        
-    #     data_team_1 = eval(data[0].replace('{', '')).strip()
-    #     data_team_2 = eval(data[1].replace('}', '')).strip()
+    if request.method == "POST":
+        data_in = request.get_json()
 
-    #     c.update_team_1_now(data_team_1, data_team_2)
-    #     c.update_time(das[1], das[2])
+        data_out = data_in[0].split(':')
+        
+        data_team_1 = eval(data_out[0].replace('{', '')).strip()
+        data_team_2 = eval(data_out[1].replace('}', '')).strip()
+
+        c.update_team_1_now(data_team_1, data_team_2)
+        c.update_time(data_in[1], data_in[2])
 
     return render_template("mauk.html", list_team = t.get_team_1_name())
 
