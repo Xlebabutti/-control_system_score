@@ -4,7 +4,7 @@ from .extensions import db
 
 from .view_score import view_score
 from .view_team import view_team
-# from .view_time import view_time
+from .view_time import view_time
 
 from .views import views
 
@@ -19,7 +19,7 @@ def create_app(config_file='settings.py'):
 
     app.register_blueprint(view_score)
     app.register_blueprint(view_team)
-    # app.register_blueprint(view_time)
+    app.register_blueprint(view_time)
 
     app.register_blueprint(views)
 

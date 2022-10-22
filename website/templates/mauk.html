@@ -65,11 +65,8 @@
 </body>
     <script>
     $('.switch-btn').click(function(){
-      $(this).toggleClass('switch-on');
-    
-      element.className = "switch-btn";
-        console.log(HTMLElementObject.className);
-
+        $(this).toggleClass('switch-on');
+        console.log(getComputedStyle(document.querySelector('div.switch-btn'), ':after').getPropertyValue('content').replace(/"/g, ''));
     })
     </script>
    <script>
