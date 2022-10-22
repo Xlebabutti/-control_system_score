@@ -113,6 +113,4 @@ class Team_name(db.Model):
         
         return list_team_name
 
-db.create_all()
-
         
